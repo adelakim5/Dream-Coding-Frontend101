@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        .tag{
+            display: inline-block;
+            background-color: thistle;
+            padding: 16px;
+            margin-top: 16px;
+            font-size: 48px;
+        }
+    </style>
+
+</head>
+
+<body onresize="getResize()">
+    <div class="tag">
+        <p>window.screen: <span id="window-screen-width"></span>, <span id="window-screen-height"></span></p>
+        <p>window.outer: <span id="window-outer-width"></span>, <span id="window-outer-height"></span></p>
+        <p>window.inner: <span id="window-inner-width"></span>, <span id="window-inner-height"></span></p>
+        <p>documentElement.clientWidth: <span id="document-client"></span></p>
+    </div>
+
+    <script>
+        document.getElementById('window-screen-width').innerHTML = screen.width
+        document.getElementById('window-screen-height').innerHTML = screen.height
+
+        function getResize() {
+            var outer_h = window.outerHeight
+            var outer_w = window.outerWidth
+            document.getElementById('window-outer-width').innerHTML = outer_w
+            document.getElementById('window-outer-height').innerHTML = outer_h
+
+            var inner_h = window.innerHeight
+            var inner_w = window.innerWidth
+            document.getElementById('window-inner-width').innerHTML = inner_w
+            document.getElementById('window-inner-height').innerHTML = inner_h
+
+            var dw = document.body.clientWidth
+            var dh = document.body.clientHeight
+            var text = dw + ', ' + dh
+            document.getElementById('document-client').innerHTML = text
+        }
+    </script>
+</body>
+
+</html>

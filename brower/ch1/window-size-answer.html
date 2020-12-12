@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        .tag{
+            display: inline-block;
+            background-color: thistle;
+            padding: 16px;
+            margin-top: 16px;
+            font-size: 48px;
+        }
+    </style>
+
+</head>
+<body>
+    <div class="tag">
+    Window Size
+    </div>
+
+    <script>
+        const tag = document.querySelector('.tag');
+        function updateTag(){
+            tag.innerHTML = `
+            window.screen: ${window.screen.width}, ${window.screen.height} <br>
+            window.outer: ${window.outerWidth}, ${window.outerHeight}<br>
+            window.inner: ${window.innerWidth}, ${window.innerHeight}<br>
+            documentElement.clientWidth: ${document.documentElement.clientWidth}, ${document.documentElement.clientHeight}
+            `;
+        }
+        // DOM요소 중에 클래스가 tag && 첫번째로 발견되는 tag가 const tag에 할당
+        window.addEventListener('resize', ()=> {
+            // 윈도우 창 '변경'될때마다 이 함수를 호출 
+            updateTag();
+            /*
+            console.log(`window.screen: ${window.screen.width}, ${window.screen.height}`);
+            console.log(`window.outer: ${window.screen.outerWidth}, ${window.screen.outerHeight}`);
+            console.log(`window.inner: ${window.screen.innerWidth}, ${window.screen.innerHeight}`);
+            console.log(`documentElement.clientWidth: ${document.documentElement.clientWidth}, ${document.documentElement.clientHeight}`);
+            */
+        })
+        updateTag();
+        // 페이지 처음 로딩될 때 실행 
+        
+    </script>
+</body>
+
+</html>

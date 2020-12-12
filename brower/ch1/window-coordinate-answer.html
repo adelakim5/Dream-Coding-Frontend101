@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Coordinates</title>
+    <style>
+        body {
+            background-color: black;
+            /* overflow: hidden; */
+            /* 문서의 내용이 window보다 벗어나게 되면 보이지 않도록 => 스크롤이 안되도록  */
+        }
+
+        div {
+            margin-bottom: 4px;
+            width: 250px;
+            height: 250px;
+            background-color: blanchedalmond;
+            border-radius: 4px;
+        }
+
+        .one {
+            background-color: coral;
+        }
+
+        aside{
+            position: fixed;
+            top:20px;
+            right:20px;
+        }
+    </style>
+</head>
+
+<body>
+    <div></div>
+    <div></div>
+    <div></div>
+    <div></div>
+    <div></div>
+    <div></div>
+    <div></div>
+    <div class="one"></div>
+    <div></div>
+    <div></div>
+    <aside>
+        <button class="scroll-by">Scroll By 100px(y)</button>
+        <button class="scroll-to">Scroll To 100px(y)</button>
+        <button class="scroll-into">Scroll into One</button>
+    </aside>
+</body>
+<script>
+    const one = document.querySelector('.one')
+    // one.addEventListener("click", printMousePos, false)
+    one.addEventListener('click', (event) => {
+        // event라는 오브젝트가 전달됨 
+        const rect = one.getBoundingClientRect()
+        console.log(rect)
+        console.log(`client: ${event.clientX}, ${event.clientY}`)
+        console.log(`page: ${event.pageX}, ${event.pageY}`)
+    })
+
+    const scrollBy = document.querySelector('.scroll-by')
+    const scrollTo = document.querySelector('.scroll-to')
+    const scrollInto = document.querySelector('.scroll-into')
+
+    scrollBy.addEventListener('click', () => {
+        // window.scrollBy(0, 100)
+        window.scrollBy({top: 100, left: 0, behavior: "smooth"})
+    })
+    scrollTo.addEventListener('click', () => {
+        window.scrollTo(0, 100)
+    })
+    scrollInto.addEventListener('click', () => {
+        one.scrollIntoView()
+    })
+</script>
+
+</html>

@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Coordinates</title>
+    <style>
+        body {
+            background-color: black;
+            /* overflow: hidden; */
+            /* 문서의 내용이 window보다 벗어나게 되면 보이지 않도록 => 스크롤이 안되도록  */
+        }
+
+        div {
+            margin-bottom: 4px;
+            width: 250px;
+            height: 250px;
+            background-color: blanchedalmond;
+            border-radius: 4px;
+        }
+
+        .one {
+            background-color: coral;
+        }
+
+        .buttons {
+            width: 100%;
+            top:0;
+            border-radius: 0%;
+            height:auto;
+            background-color: black;
+            position: fixed;
+            display: flex;
+            flex-direction: row-reverse;
+        }
+
+        .buttons button {
+            margin-right: 10px;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="buttons">
+        <button class="scrollInto">Scroll Into One</button>
+        <button class="scrollTo">Scroll To 100px</button>
+        <button class="scrollBy">Scroll By 100px</button>
+    </div>
+
+    <div></div>
+    <div></div>
+    <div></div>
+    <div></div>
+    <div></div>
+    <div></div>
+    <div></div>
+    <div class="one"></div>
+    <div></div>
+    <div></div>
+</body>
+<script>
+    const one = document.querySelector('.one')
+    // one.addEventListener("click", printMousePos, false)
+    one.addEventListener('click', (event) => {
+        // event라는 오브젝트가 전달됨 
+        const rect = one.getBoundingClientRect()
+        console.log(rect)
+        console.log(`client: ${event.clientX}, ${event.clientY}`)
+        console.log(`page: ${event.pageX}, ${event.pageY}`)
+    })
+
+    const scrollBy = document.querySelector('.scrollBy')
+    const scrollInto = document.querySelector('.scrollInto')
+    const scrollTo = document.querySelector('.scrollTo')
+    scrollBy.addEventListener('click', (event) => {
+        window.scrollBy(event.clientX, event.clientY + 100)
+    })
+    scrollTo.addEventListener('click', () => {
+        window.scrollTo(0, 100)
+    })
+    scrollInto.addEventListener('click', () => {
+       one.scrollIntoView()
+    })
+
+    // function printMousePos(event) {
+    //     var pX = event.pageX
+    //     var pY = event.pageY
+    //     var cX = event.clientX
+    //     var cY = event.clientY
+    //     console.log(rect)
+    //     console.log("client:", cX, cY)
+    //     console.log("page:", pX, pY)
+    // }
+</script>
+
+</html>

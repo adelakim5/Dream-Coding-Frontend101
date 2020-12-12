@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>load</title>
+    <!-- first printed -->
+    <script src="test.js" defer></script>
+    <!-- defer -> DOMContentLoaded이 발생하는 즈음에 발생함 -> 효율적! -->
+</head>
+<body>
+    <!-- body끝에 script
+    : 브라우저가 처음부터 끝까지 html문서를 읽으면서 콜백 함수를 출력 -->
+    <script>
+        // after resources (like font.. images.. css...)
+        window.addEventListener('load', ()=> {
+            console.log('load')
+            // resource가 준비 다 된 다음에 
+        })
+        // only document 
+        window.addEventListener('DOMContentLoaded', ()=> {
+            console.log('DOMContentLoaded')
+            // 조금 더 빠르게 사용자가 볼 수 있음 
+        })
+        // test.js(in head) -> DOMContentLoaded -> load printed
+        
+        // before unload
+        // 사용자가 페이지를 나갈떄 나가기전에 불려지는 함수
+        window.addEventListener('beforeunload', ()=> {
+            console.log('beforeunload')
+        })
+        // resouce is being unloaded
+        window.addEventListener('unload', ()=> {
+            console.log('unload')
+        })
+    </script>
+</body>
+</html>

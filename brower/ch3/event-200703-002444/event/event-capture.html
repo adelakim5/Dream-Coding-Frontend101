@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Document</title>
+  <style>
+    .outer {
+      width: 500px;
+      height: 500px;
+      background-color: yellow;
+    }
+
+    .middle {
+      width: 50%;
+      height: 50%;
+      margin: auto;
+      background-color: thistle;
+      transform: translateY(50%);
+    }
+
+    button {
+      position: relative;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+    }
+  </style>
+</head>
+
+<body>
+  <div class="outer">
+    <div class="middle">
+      <button>Click Me</button>
+    </div>
+  </div>
+  <script>
+    const outer = document.querySelector('.outer');
+    const middle = document.querySelector('.middle');
+    const button = document.querySelector('button');
+
+    outer.addEventListener('click', event => {
+      if (event.target !== event.currentTarget) {
+        // event.stopImmediatePropagation
+        // event.stopPropagation
+        // 이런것들 대신에(b/c 매우 위험) 이런식으로 부모에서 작성해주는 것이 매우 좋음 
+        return;
+      }
+      console.log(`outer: ${event.currentTarget}, ${event.target}`);
+    });
+    middle.addEventListener('click', event => {
+      if (event.target !== event.currentTarget) {
+        return;
+      }
+      console.log(`middle ${event.currentTarget}, ${event.target}`);
+    });
+    button.addEventListener('click', event => {
+      console.log(`button1 ${event.currentTarget}, ${event.target}`);
+      // event.stopPropagation()
+      // 위로 전달하는 것을 그만하는 것 
+      // bubbling이 일어나지 않음 
+      // event.stopImmediatePropagation()
+      // 다른 애들은 다 무시해 !!!
+    });
+    button.addEventListener('click', event => {
+      console.log(`button2 ${event.currentTarget}, ${event.target}`);
+      // event.stopImmediatePropagation()
+      // button1이 등록되고 button2가 등록되었기 때문에 => capturing => 1 갔다가 2 갔다가 위로 가는 것 
+      // 따라서 이전에 발생한 1은 그대로 진행됨 
+      // 이 이후 3을 add하면? 3은 일어나지 않음 
+    });
+
+    
+  </script>
+</body>
+
+</html>
